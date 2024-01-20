@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Instituto Leibniz</title>
+  <h2> Sistema Instituto Leibniz</h2>
+
+</head>
+<body>
+
+<!-- Contenedor, los profes pueden registrarse y reservar las aulas que no estén ocupadas, además 
+pueden ver debajo los profes registrados y sus respectivas aulas -->
+
+  <div class="container">
+    <h1>Registro de Profesores</h1>
+    <form id="registroForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required>
+
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" required>
+
+      <label for="aula">Aula:</label>
+      <select id="aula" required>
+        <option value="aula1">Aula 1</option>
+        <option value="aula2">Aula 2</option>
+        <option value="aula3">Aula 3</option>
+      </select>
+
+      <label for="horario">Horario:</label>
+      <select id="horario" required>
+        <option value="14:00">14:00</option>
+        <option value="15:00">15:00</option>
+        <option value="16:00">16:00</option>
+        <option value="17:00">17:00</option>
+        <option value="18:00">18:00</option>
+        <option value="19:00">19:00</option>
+        <option value="20:00">20:00</option>
+      </select>
+
+      <button type="button" onclick="registrarProfesor()">Registrar</button>
+    </form>
+    
+    <div id="listaProfesores">
+      <h2>Profesores Registrados</h2>
+      <ul id="listaProfesoresUl"></ul>
+    </div>
+
+    <div id="mensaje"></div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
