@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   cargarProfesores();
+
+
 }
 );
+
+
 
 function registrarProfesor() {
   const nombre = document.getElementById('nombre').value;
@@ -48,39 +52,51 @@ function cargarProfesores() {
 
  const profesoresRegistrados = obtenerProfesores();
 
+// Limpia todas las celdas de la tabla
+for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
+  for (let horario of ['1400', '1500', '1600', '1700', '1800', '1900']) {
+    const cell = document.getElementById(`${dia}${horario}`);
+    if (cell) {
+      cell.innerHTML = '';
+      cell.classList.remove('aula1', 'aula2', 'aula3'); // Elimina las clases de aulas anteriores
+    }
+  }
+}
 
- const listaProfesoresUl = document.getElementById('listaProfesoresUl');
-
-
-listaProfesoresUl.innerHTML = '';
-
-
+// Llena las celdas con los profesores registrados
 profesoresRegistrados.forEach((profesor) => {
+  const cell = document.getElementById(`${profesor.dia}${profesor.horario.replace(':', '')}`);
+  if (cell) {
+    // Verifica si ya hay contenido en la celda
+    if (cell.textContent !== '') {
+      // Si ya hay contenido, hace un salto de linea y el nuevo profesor
+      cell.innerHTML += `<br><div class="profesor ${profesor.aula.toLowerCase()}">${profesor.nombre} ${profesor.apellido}</div>`;
+    } else {
+      // Si no hay contenido, agrega el primer profesor
+      cell.innerHTML += `<div class="profesor ${profesor.aula.toLowerCase()}">${profesor.nombre} ${profesor.apellido}</div>`;
+    }
+  }
 
-const li = document.createElement('li');
+});
 
 
- li.textContent = `- Profesor: ${profesor.nombre} ${profesor.apellido} - Aula: ${profesor.aula} - Horario: ${profesor.horario} - Día: ${profesor.dia}`;
+//  const listaProfesoresUl = document.getElementById('listaProfesoresUl');
 
-listaProfesoresUl.appendChild(li);
- });
 
- // parte de la tabla 
+// listaProfesoresUl.innerHTML = '';
 
- for (let aula = 1; aula <= 2; aula++) {
- for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
-    const celda = document.getElementById(`aula${aula}-${dia}`);
-    celda.textContent = '';
- }
- }
 
- // Llena las celdas de la tabla con los profesores registrados
- profesoresRegistrados.forEach((profesor) => {
-   const { aula, dia } = profesor;
-   const celda = document.getElementById(`aula${aula}-${dia}`);
-  celda.textContent = `${profesor.nombre} ${profesor.apellido} ${profesor.horario}`;
- });
+// profesoresRegistrados.forEach((profesor) => {
 
+// const li = document.createElement('li');
+
+
+//  li.textContent = `- Profesor: ${profesor.nombre} ${profesor.apellido} - Aula: ${profesor.aula} - Horario: ${profesor.horario} - Día: ${profesor.dia}`;
+
+// listaProfesoresUl.appendChild(li);
+//  });
+
+ 
  }
 
 function limpiarFormulario() {
@@ -92,36 +108,22 @@ const inputApellido = document.getElementById('apellido');
 const inputAula = document.getElementById('aula');
 const inputHorario = document.getElementById('horario');
 
+
   inputNombre.value = '';
   inputApellido.value = '';
   inputAula.value = 'aula1';
   inputHorario.value = '14:00';
 }
 
-function mostrarMensaje(mensaje) {
-  const mensajeDiv = document.getElementById('mensaje');
-  mensajeDiv.innerHTML = mensaje;
+// function mostrarMensaje(mensaje) {
+//   const mensajeDiv = document.getElementById('mensaje');
+//   mensajeDiv.innerHTML = mensaje;
 
-  mensajeDiv.addEventListener('click', () => {
-    mensajeDiv.textContent = '';
-  });
-}
-
-// function cargarProfesores() {
-//   const profesoresRegistrados = obtenerProfesores();
-
-//   // Limpia todas las celdas de la tabla
-// for (let aula = 1; aula <= 2; aula++) {
-//   for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
-//     const celda = document.getElementById(`aula${aula}-${dia}`);
-//     celda.textContent = '';
-//   }
+//   mensajeDiv.addEventListener('click', () => {
+//     mensajeDiv.textContent = '';
+//   });
 // }
 
-// // Llena las celdas de la tabla con los profesores registrados
-// profesoresRegistrados.forEach((profesor) => {
-//   const { aula, dia } = profesor;
-//   const celda = document.getElementById(`aula${aula}-${dia}`);
-//   celda.textContent = `${profesor.nombre} ${profesor.apellido}`;
-// });
-// }
+
+
+

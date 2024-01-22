@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema Instituto Leibniz</title>
-  <h2> Sistema Instituto Leibniz</h2>
+  
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
 
+    table, th, td {
+      border: 1px solid rgb(196, 193, 193);
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-
+  <!-- <h2> Sistema Instituto Leibniz</h2> -->
 <!-- Contenedor, los profes pueden registrarse y reservar las aulas que no estén ocupadas, además 
 pueden ver debajo los profes registrados y sus respectivas aulas -->
 
@@ -23,9 +39,9 @@ pueden ver debajo los profes registrados y sus respectivas aulas -->
 
       <label for="aula">Aula:</label>
       <select id="aula" required>
-        <option value="aula1">Aula 1</option>
-        <option value="aula2">Aula 2</option>
-        <option value="aula3">Aula 3</option>
+        <option value="aula1" style = "color: blue">Aula 1</option>
+        <option value="aula2" style = "color: rgb(126, 185, 36)">Aula 2</option>
+        <option value="aula3" style ="color: orangered">Aula 3</option>
       </select>
 
       <label for="dia">Día:</label>
@@ -39,57 +55,99 @@ pueden ver debajo los profes registrados y sus respectivas aulas -->
 
       <label for="horario">Horario:</label>
       <select id="horario" required>
-        <option value="14:00">14:00</option>
-        <option value="15:00">15:00</option>
-        <option value="16:00">16:00</option>
-        <option value="17:00">17:00</option>
-        <option value="18:00">18:00</option>
-        <option value="19:00">19:00</option>
-        <option value="20:00">20:00</option>
+        <option value="14:00">14:00-15:00</option>
+        <option value="15:00">15:00-16:00</option>
+        <option value="16:00">16:00-17:00</option>
+        <option value="17:00">17:00-18:00</option>
+        <option value="18:00">18:00-19:00</option>
+        <option value="19:00">19:00-20:00</option>
       </select>
 
       <button type="button" onclick="registrarProfesor()">Registrar</button>
     </form>
     
+<!-- Tabla en donde se muestran los profes registrados con su respectivo horario,
+el color indica el aula que ocupan, azul para aula1, verde para aula2, y naranja para aula3 -->
 
 
-<div id="listaProfesores">
-    <h2>Profesores Registrados</h2>
-    <ul id="listaProfesoresUl"></ul>
-    <table id="tablaProfesores">
-      <thead>
-        <tr>
-          <th></th> <!-- Celda vacía en la esquina superior izquierda -->
-          <th>Lunes</th>
-          <th>Martes</th>
-          <th>Miércoles</th>
-          <th>Jueves</th>
-          <th>Viernes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="aula1">
-          <td>Aula 1</td>
-          <td id="aula1-lunes"></td>
-          <td id="aula1-martes"></td>
-          <td id="aula1-miercoles"></td>
-          <td id="aula1-jueves"></td>
-          <td id="aula1-viernes"></td>
-        </tr>
-        <tr id="aula2">
-          <td>Aula 2</td>
-          <td id="aula2-lunes"></td>
-          <td id="aula2-martes"></td>
-          <td id="aula2-miercoles"></td>
-          <td id="aula2-jueves"></td>
-          <td id="aula2-viernes"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<h2>Horarios</h2>
+<table id="tablaHorarios">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Lunes</th>
+      <th>Martes</th>
+      <th>Miércoles</th>
+      <th>Jueves</th>
+      <th>Viernes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>14:00 - 15:00</td>
+      <td id="lunes1400"></td>
+      <td id="martes1400"></td>
+      <td id="miercoles1400"></td>
+      <td id="jueves1400"></td>
+      <td id="viernes1400"></td>
+    </tr>
+    
+
+    <tr>
+      <td>15:00 - 16:00</td>
+      <td id="lunes1500"></td>
+      <td id="martes1500"></td>
+      <td id="miercoles1500"></td>
+      <td id="jueves1500"></td>
+      <td id="viernes1500"></td>
+    </tr>
+    
+    <tr>
+      <td>16:00 - 17:00</td>
+      <td id="lunes1600"></td>
+      <td id="martes1600"></td>
+      <td id="miercoles1600"></td>
+      <td id="jueves1600"></td>
+      <td id="viernes1600"></td>
+    </tr>  
+
+    <tr>
+      <td>17:00 - 18:00</td>
+      <td id="lunes1700"></td>
+      <td id="martes1700"></td>
+      <td id="miercoles1700"></td>
+      <td id="jueves1700"></td>
+      <td id="viernes1700"></td>
+    </tr>  
+
+    <tr>
+      <td>18:00 - 19:00</td>
+      <td id="lunes1800"></td>
+      <td id="martes1800"></td>
+      <td id="miercoles1800"></td>
+      <td id="jueves1800"></td>
+      <td id="viernes1800"></td>
+    </tr>  
+
+    <tr>
+      <td>19:00 - 20:00</td>
+      <td id="lunes1900"></td>
+      <td id="martes1900"></td>
+      <td id="miercoles1900"></td>
+      <td id="jueves1900"></td>
+      <td id="viernes1900"></td>
+    </tr> 
+
+    
+
+  </tbody>
+</table>
+
+<h3 style = "color: blue">Aula 1</h3> <h3 style = "color: rgb(126, 185, 36)">Aula 2</h3>
+
+<h3 style = "color: orangered">Aula 3</h3>
 
 
-    <div id="mensaje"></div>
   </div>
 
   <script src="./script.js"></script>

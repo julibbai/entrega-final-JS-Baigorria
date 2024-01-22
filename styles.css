@@ -6,7 +6,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 250vh;
 }
 
 .container {
@@ -38,5 +38,25 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #5d8d60;
+}
+
+/* styles.css */
+
+/* Estilos generales */
+.profesor {
+  margin-bottom: 5px;
+}
+
+/* Estilos para cada aula */
+.profesor.aula1 {
+  color: blue;
+}
+
+.profesor.aula2 {
+  color: rgb(126, 185, 36);
+}
+
+.profesor.aula3 {
+  color: orangered;
 }
