@@ -4,41 +4,27 @@ document.addEventListener("DOMContentLoaded", function () {
 );
 
 function registrarProfesor() {
-
-
   const nombre = document.getElementById('nombre').value;
   const apellido = document.getElementById('apellido').value;
   const aula = document.getElementById('aula').value;
   const horario = document.getElementById('horario').value;
+  const dia = document.getElementById('dia').value;
 
-
-
-  const profesor = { nombre, apellido, aula, horario };
-
-
+  const profesor = { nombre, apellido, aula, horario, dia };
   const profesoresRegistrados = obtenerProfesores();
 
-
   const horarioOcupado = profesoresRegistrados.some(
-    (p) => p.aula === aula && p.horario === horario
+    (p) => p.aula === aula && p.horario === horario && p.dia === dia
   );
 
-
   if (horarioOcupado) {
-    mostrarMensaje('El horario y aula seleccionados ya están ocupados.');
+    mostrarMensaje('El horario, aula y día seleccionados ya están ocupados.');
   } else {
-
-
     profesoresRegistrados.push(profesor);
-
-
     guardarProfesores(profesoresRegistrados);
-
-
-    mostrarMensaje('Profesor registrado correctamente.');
-
-
     limpiarFormulario();
+    mostrarMensaje('Profesor registrado correctamente.');
+    cargarProfesores(); // Llama a cargarProfesores después de guardar y limpiar
   }
 }
 
@@ -60,10 +46,10 @@ function guardarProfesores(profesores) {
 
 function cargarProfesores() {
 
-  const profesoresRegistrados = obtenerProfesores();
+ const profesoresRegistrados = obtenerProfesores();
 
 
-  const listaProfesoresUl = document.getElementById('listaProfesoresUl');
+ const listaProfesoresUl = document.getElementById('listaProfesoresUl');
 
 
 listaProfesoresUl.innerHTML = '';
@@ -71,14 +57,31 @@ listaProfesoresUl.innerHTML = '';
 
 profesoresRegistrados.forEach((profesor) => {
 
-  const li = document.createElement('li');
+const li = document.createElement('li');
 
 
-  li.textContent = `- Profesor: ${profesor.nombre} ${profesor.apellido} - Aula: ${profesor.aula}, Horario: ${profesor.horario}`;
+ li.textContent = `- Profesor: ${profesor.nombre} ${profesor.apellido} - Aula: ${profesor.aula} - Horario: ${profesor.horario} - Día: ${profesor.dia}`;
 
-  listaProfesoresUl.appendChild(li);
-});
-}
+listaProfesoresUl.appendChild(li);
+ });
+
+ // parte de la tabla 
+
+ for (let aula = 1; aula <= 2; aula++) {
+ for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
+    const celda = document.getElementById(`aula${aula}-${dia}`);
+    celda.textContent = '';
+ }
+ }
+
+ // Llena las celdas de la tabla con los profesores registrados
+ profesoresRegistrados.forEach((profesor) => {
+   const { aula, dia } = profesor;
+   const celda = document.getElementById(`aula${aula}-${dia}`);
+  celda.textContent = `${profesor.nombre} ${profesor.apellido} ${profesor.horario}`;
+ });
+
+ }
 
 function limpiarFormulario() {
 
@@ -103,3 +106,22 @@ function mostrarMensaje(mensaje) {
     mensajeDiv.textContent = '';
   });
 }
+
+// function cargarProfesores() {
+//   const profesoresRegistrados = obtenerProfesores();
+
+//   // Limpia todas las celdas de la tabla
+// for (let aula = 1; aula <= 2; aula++) {
+//   for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
+//     const celda = document.getElementById(`aula${aula}-${dia}`);
+//     celda.textContent = '';
+//   }
+// }
+
+// // Llena las celdas de la tabla con los profesores registrados
+// profesoresRegistrados.forEach((profesor) => {
+//   const { aula, dia } = profesor;
+//   const celda = document.getElementById(`aula${aula}-${dia}`);
+//   celda.textContent = `${profesor.nombre} ${profesor.apellido}`;
+// });
+// }

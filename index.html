@@ -28,6 +28,15 @@ pueden ver debajo los profes registrados y sus respectivas aulas -->
         <option value="aula3">Aula 3</option>
       </select>
 
+      <label for="dia">Día:</label>
+      <select id="dia" required>
+        <option value="lunes">Lunes</option>
+        <option value="martes">Martes</option>
+        <option value="miercoles">Miércoles</option>
+        <option value="jueves">Jueves</option>
+        <option value="viernes">Viernes</option>
+      </select>
+
       <label for="horario">Horario:</label>
       <select id="horario" required>
         <option value="14:00">14:00</option>
@@ -42,10 +51,43 @@ pueden ver debajo los profes registrados y sus respectivas aulas -->
       <button type="button" onclick="registrarProfesor()">Registrar</button>
     </form>
     
-    <div id="listaProfesores">
-      <h2>Profesores Registrados</h2>
-      <ul id="listaProfesoresUl"></ul>
-    </div>
+
+
+<div id="listaProfesores">
+    <h2>Profesores Registrados</h2>
+    <ul id="listaProfesoresUl"></ul>
+    <table id="tablaProfesores">
+      <thead>
+        <tr>
+          <th></th> <!-- Celda vacía en la esquina superior izquierda -->
+          <th>Lunes</th>
+          <th>Martes</th>
+          <th>Miércoles</th>
+          <th>Jueves</th>
+          <th>Viernes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="aula1">
+          <td>Aula 1</td>
+          <td id="aula1-lunes"></td>
+          <td id="aula1-martes"></td>
+          <td id="aula1-miercoles"></td>
+          <td id="aula1-jueves"></td>
+          <td id="aula1-viernes"></td>
+        </tr>
+        <tr id="aula2">
+          <td>Aula 2</td>
+          <td id="aula2-lunes"></td>
+          <td id="aula2-martes"></td>
+          <td id="aula2-miercoles"></td>
+          <td id="aula2-jueves"></td>
+          <td id="aula2-viernes"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 
     <div id="mensaje"></div>
   </div>
