@@ -63,7 +63,7 @@ pueden ver debajo los profes registrados y sus respectivas aulas -->
         <option value="19:00">19:00-20:00</option>
       </select>
 
-      <button type="button" onclick="registrarProfesor()">Registrar</button>
+      <button id="botonRegistrar" type="button" onclick="registrarProfesor()">Registrar</button>
     </form>
     
 <!-- Tabla en donde se muestran los profes registrados con su respectivo horario,
@@ -143,13 +143,14 @@ el color indica el aula que ocupan, azul para aula1, verde para aula2, y naranja
   </tbody>
 </table>
 
-<h3 style = "color: blue">Aula 1</h3> <h3 style = "color: rgb(126, 185, 36)">Aula 2</h3>
-
+<h3 style = "color: blue">Aula 1</h3>
+ <h3 style = "color: rgb(126, 185, 36)">Aula 2</h3>
 <h3 style = "color: orangered">Aula 3</h3>
 
 
   </div>
 
-  <script src="./script.js"></script>
+  <script type="module" src="./script.js"></script>
+
 </body>
 </html>

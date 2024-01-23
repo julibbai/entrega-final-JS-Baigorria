@@ -1,11 +1,49 @@
+import Swal from 'sweetalert2'
 document.addEventListener("DOMContentLoaded", function () {
   cargarProfesores();
-
-
 }
 );
 
 
+const botonRegistrar = document.querySelector("#botonRegistrar");
+const nombre = document.getElementById('nombre').value;
+const apellido = document.getElementById('apellido').value;
+
+botonRegistrar.onclick = () => {
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  if (nombre && apellido){
+
+      Swal.fire({
+          title: "¿Está seguro de los datos ingresados?",
+          confirmButtonText:"Sí",
+          confirmButtonColor:"green",
+          showCancelButton:true,
+          cancelButtonText: "No",
+          cancelButtonColor:"red",
+          icon:"question"
+
+      }).then((respuesta) => { 
+          if(respuesta.isConfirmed){
+            registrarProfesor();
+          }
+          else {};
+        } 
+      )
+      
+  } else {
+      Swal.fire({
+          title:"Datos Incompletos",
+          text: "Falta Nombre o Apellido",
+          icon:"error",
+          time:3000,
+          timerProgressBar:true,
+      })
+  }
+}
+
+
+////////////
 
 function registrarProfesor() {
   const nombre = document.getElementById('nombre').value;
@@ -22,12 +60,24 @@ function registrarProfesor() {
   );
 
   if (horarioOcupado) {
-    mostrarMensaje('El horario, aula y día seleccionados ya están ocupados.');
+    Swal.fire({
+      title:'El horario, aula y día seleccionados ya están ocupados.',
+      icon: "warning",
+      timer:3000,
+      timerProgressBar:true
+
+    })
+    
   } else {
     profesoresRegistrados.push(profesor);
     guardarProfesores(profesoresRegistrados);
     limpiarFormulario();
-    mostrarMensaje('Profesor registrado correctamente.');
+    Swal.fire({
+      title: 'Profesor registrado correctamente.',
+      icon:"success",
+      timer:3000,
+      timerProgressBar:true
+    })
     cargarProfesores(); // Llama a cargarProfesores después de guardar y limpiar
   }
 }
@@ -79,25 +129,7 @@ profesoresRegistrados.forEach((profesor) => {
 
 });
 
-
-//  const listaProfesoresUl = document.getElementById('listaProfesoresUl');
-
-
-// listaProfesoresUl.innerHTML = '';
-
-
-// profesoresRegistrados.forEach((profesor) => {
-
-// const li = document.createElement('li');
-
-
-//  li.textContent = `- Profesor: ${profesor.nombre} ${profesor.apellido} - Aula: ${profesor.aula} - Horario: ${profesor.horario} - Día: ${profesor.dia}`;
-
-// listaProfesoresUl.appendChild(li);
-//  });
-
- 
- }
+}
 
 function limpiarFormulario() {
 
@@ -115,14 +147,6 @@ const inputHorario = document.getElementById('horario');
   inputHorario.value = '14:00';
 }
 
-// function mostrarMensaje(mensaje) {
-//   const mensajeDiv = document.getElementById('mensaje');
-//   mensajeDiv.innerHTML = mensaje;
-
-//   mensajeDiv.addEventListener('click', () => {
-//     mensajeDiv.textContent = '';
-//   });
-// }
 
 
 
