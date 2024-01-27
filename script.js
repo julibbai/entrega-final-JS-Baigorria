@@ -1,8 +1,25 @@
 import Swal from 'sweetalert2'
+
+
+function mostrarInformacion(nombre, apellido, aula, horario, dia) {
+  console.log("Esto sirve??");
+
+  Swal.fire({
+    title: "¿Qué necesitas realizar?",
+    confirmButtonText:"Modificar",
+    confirmButtonColor:"lightpurple",
+    showCancelButton:true,
+    cancelButtonText: "Eliminar",
+    cancelButtonColor:"red",
+    icon:"question"
+
+  })
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   cargarProfesores();
-}
-);
+  limpiarFormulario();
+});
 
 
 const botonRegistrar = document.querySelector("#botonRegistrar");
@@ -34,8 +51,8 @@ botonRegistrar.onclick = () => {
   } else {
       Swal.fire({
           title:"Datos Incompletos",
-          text: "Falta Nombre o Apellido",
-          icon:"error",
+          text: "Falta información requerida",
+          icon:"warning",
           time:3000,
           timerProgressBar:true,
       })
@@ -61,8 +78,9 @@ function registrarProfesor() {
 
   if (horarioOcupado) {
     Swal.fire({
-      title:'El horario, aula y día seleccionados ya están ocupados.',
-      icon: "warning",
+      title:"Lo sentimos",
+      text: 'El horario, aula y día seleccionados ya están ocupados.',
+      icon:"error",
       timer:3000,
       timerProgressBar:true
 
@@ -108,6 +126,7 @@ for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
     const cell = document.getElementById(`${dia}${horario}`);
     if (cell) {
       cell.innerHTML = '';
+      
       cell.classList.remove('aula1', 'aula2', 'aula3'); // Elimina las clases de aulas anteriores
     }
   }
@@ -117,19 +136,19 @@ for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
 profesoresRegistrados.forEach((profesor) => {
   const cell = document.getElementById(`${profesor.dia}${profesor.horario.replace(':', '')}`);
   if (cell) {
-    // Verifica si ya hay contenido en la celda
-    if (cell.textContent !== '') {
-      // Si ya hay contenido, hace un salto de linea y el nuevo profesor
-      cell.innerHTML += `<br><div class="profesor ${profesor.aula.toLowerCase()}">${profesor.nombre} ${profesor.apellido}</div>`;
-    } else {
-      // Si no hay contenido, agrega el primer profesor
-      cell.innerHTML += `<div class="profesor ${profesor.aula.toLowerCase()}">${profesor.nombre} ${profesor.apellido}</div>`;
-    }
+    const button = document.createElement('button');
+    button.classList.add('profesor-btn', profesor.aula.toLowerCase());
+    button.textContent = `${profesor.nombre} ${profesor.apellido}`;
+    button.onclick = () => mostrarInformacion(profesor.nombre, profesor.apellido, profesor.aula, profesor.horario, profesor.dia);
+    cell.appendChild(button);
+    
   }
 
 });
-
 }
+
+
+
 
 function limpiarFormulario() {
 
@@ -139,12 +158,14 @@ const inputNombre = document.getElementById('nombre');
 const inputApellido = document.getElementById('apellido');
 const inputAula = document.getElementById('aula');
 const inputHorario = document.getElementById('horario');
+const inputDia = document.getElementById('dia');
 
 
   inputNombre.value = '';
   inputApellido.value = '';
   inputAula.value = 'aula1';
   inputHorario.value = '14:00';
+  inputDia.value = 'lunes';
 }
 
 
