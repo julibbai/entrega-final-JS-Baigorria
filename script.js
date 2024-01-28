@@ -1,12 +1,11 @@
 import Swal from 'sweetalert2';
 import profesoresApi from "./src/api/profesores.api.js";
 
-// let profesores = profesoresApi.obtenerProfes();
-// const profesoresRegistrados = await profesoresApi.obtenerProfes();
+
 
 let profesoresRegistrados;
 
-function mostrarInformacion(nombre, apellido, aula, horario, dia) {
+function mostrarInformacion(id, nombre, apellido, aula, horario, dia) {
 
   Swal.fire({
     title: "¿Desea eliminar?",
@@ -18,11 +17,10 @@ function mostrarInformacion(nombre, apellido, aula, horario, dia) {
     icon:"question"
 
   }).then((respuesta) =>{
-    if(respuesta.isConfirmed){
+    if(!respuesta.isConfirmed){
+      eliminarProfesor(id);
 
-    } else {
-      eliminarProfePorId();
-    }
+    } 
   })
 };
 
@@ -66,7 +64,28 @@ botonRegistrar.onclick = () => {
 };
 
 
-////////////
+async function eliminarProfesor(id) {
+
+
+  const index = profesoresRegistrados.findIndex(profesor => profesor.id === id);
+  if (index !== -1) {
+    profesoresRegistrados.splice(index, 1); 
+
+
+    await profesoresApi.eliminarProfePorId(id);
+
+    cargarProfesores(); 
+
+      Swal.fire({
+          title:"Profesor eliminado",
+          text: "El profesor ha sido eliminado exitosamente. El aula, horario y día ahora están disponibles",
+          icon:"success",
+          timer:3000,
+          timerProgressBar:true,
+      });
+}
+}
+
 
 async function registrarProfesor()  {
   const nombre = document.getElementById('nombre').value;
@@ -95,7 +114,6 @@ async function registrarProfesor()  {
   } else {
     profesoresRegistrados.push(profesor);
     await profesoresApi.registrarProfe(profesor);
-    guardarProfesores(profesoresRegistrados);
     limpiarFormulario();
     Swal.fire({
       title: 'Profesor registrado correctamente.',
@@ -103,41 +121,32 @@ async function registrarProfesor()  {
       timer:3000,
       timerProgressBar:true
     })
-    cargarProfesores(); // Llama a cargarProfesores después de guardar y limpiar
+    cargarProfesores();
   }
 }
 
 
-function guardarProfesores(profesores) {
-
-  const profesoresJson = JSON.stringify(profesores);
-
-  localStorage.setItem('profesores', profesoresJson);
-  // cargarProfesores();
-
-}
-
-function cargarProfesores() {
-// Limpia todas las celdas de la tabla
+async function cargarProfesores() {
+profesoresRegistrados = await profesoresApi.obtenerProfes();
 for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
   for (let horario of ['1400', '1500', '1600', '1700', '1800', '1900']) {
     const cell = document.getElementById(`${dia}${horario}`);
     if (cell) {
       cell.innerHTML = '';
       
-      cell.classList.remove('aula1', 'aula2', 'aula3'); // Elimina las clases de aulas anteriores
+      cell.classList.remove('aula1', 'aula2', 'aula3'); 
     }
   }
 }
 
-// Llena las celdas con los profesores registrados
+
 profesoresRegistrados.forEach((profesor) => {
   const cell = document.getElementById(`${profesor.dia}${profesor.horario.replace(':', '')}`);
   if (cell) {
     const button = document.createElement('button');
     button.classList.add('profesor-btn', profesor.aula.toLowerCase());
     button.textContent = `${profesor.nombre} ${profesor.apellido}`;
-    button.onclick = () => mostrarInformacion(profesor.nombre, profesor.apellido, profesor.aula, profesor.horario, profesor.dia);
+    button.onclick = () => mostrarInformacion(profesor.id, profesor.nombre, profesor.apellido, profesor.aula, profesor.horario, profesor.dia);
     cell.appendChild(button);
     
   }

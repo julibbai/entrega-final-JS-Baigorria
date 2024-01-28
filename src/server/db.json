@@ -1,51 +1,19 @@
 {
   "profesores": [
     {
-      "id": "6960",
-      "nombre": "Julieta",
-      "apellido": "Baigorria",
+      "id": "f6da",
+      "nombre": "Mabel",
+      "apellido": "Miranda",
       "aula": "aula1",
-      "horario": "18:00",
+      "horario": "14:00",
       "dia": "lunes"
     },
     {
-      "id": "13db",
-      "nombre": "Eduardo",
-      "apellido": "Leguizamón",
-      "aula": "aula2",
-      "horario": "16:00",
-      "dia": "viernes"
-    },
-    {
-      "id": "3e92",
+      "id": "a9c0",
       "nombre": "Sonia",
-      "apellido": "Gutierrez",
-      "aula": "aula2",
-      "horario": "14:00",
-      "dia": "miercoles"
-    },
-    {
-      "id": "0935",
-      "nombre": "Julieta",
-      "apellido": "Leguizamón",
-      "aula": "aula3",
-      "horario": "15:00",
-      "dia": "jueves"
-    },
-    {
-      "id": "e2db",
-      "nombre": "Marta",
-      "apellido": "Martinez",
+      "apellido": "Legui",
       "aula": "aula1",
-      "horario": "16:00",
-      "dia": "viernes"
-    },
-    {
-      "id": "445c",
-      "nombre": "Monica",
-      "apellido": "Martinez",
-      "aula": "aula2",
-      "horario": "14:00",
+      "horario": "18:00",
       "dia": "lunes"
     }
   ]
