@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "json-server": "^1.0.0-alpha.23",
     "vite": "^4.4.5"
   },
   "dependencies": {

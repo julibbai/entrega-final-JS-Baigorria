@@ -1,30 +1,39 @@
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import profesoresApi from "./src/api/profesores.api.js";
 
+// let profesores = profesoresApi.obtenerProfes();
+// const profesoresRegistrados = await profesoresApi.obtenerProfes();
+
+let profesoresRegistrados;
 
 function mostrarInformacion(nombre, apellido, aula, horario, dia) {
-  console.log("Esto sirve??");
 
   Swal.fire({
-    title: "¿Qué necesitas realizar?",
-    confirmButtonText:"Modificar",
-    confirmButtonColor:"lightpurple",
+    title: "¿Desea eliminar?",
+    confirmButtonText:"Cancelar",
+    confirmButtonColor:"green",
     showCancelButton:true,
-    cancelButtonText: "Eliminar",
+    cancelButtonText: "Sí",
     cancelButtonColor:"red",
     icon:"question"
 
-  })
-}
+  }).then((respuesta) =>{
+    if(respuesta.isConfirmed){
 
-document.addEventListener("DOMContentLoaded", function () {
+    } else {
+      eliminarProfePorId();
+    }
+  })
+};
+
+document.addEventListener("DOMContentLoaded", async function () {
+  profesoresRegistrados = await profesoresApi.obtenerProfes();
   cargarProfesores();
   limpiarFormulario();
 });
 
 
 const botonRegistrar = document.querySelector("#botonRegistrar");
-const nombre = document.getElementById('nombre').value;
-const apellido = document.getElementById('apellido').value;
 
 botonRegistrar.onclick = () => {
   const nombre = document.getElementById('nombre').value;
@@ -44,25 +53,22 @@ botonRegistrar.onclick = () => {
           if(respuesta.isConfirmed){
             registrarProfesor();
           }
-          else {};
-        } 
-      )
-      
-  } else {
+        });
+        } else {
       Swal.fire({
           title:"Datos Incompletos",
           text: "Falta información requerida",
           icon:"warning",
-          time:3000,
+          timer:3000,
           timerProgressBar:true,
-      })
+      });
   }
-}
+};
 
 
 ////////////
 
-function registrarProfesor() {
+async function registrarProfesor()  {
   const nombre = document.getElementById('nombre').value;
   const apellido = document.getElementById('apellido').value;
   const aula = document.getElementById('aula').value;
@@ -70,7 +76,7 @@ function registrarProfesor() {
   const dia = document.getElementById('dia').value;
 
   const profesor = { nombre, apellido, aula, horario, dia };
-  const profesoresRegistrados = obtenerProfesores();
+
 
   const horarioOcupado = profesoresRegistrados.some(
     (p) => p.aula === aula && p.horario === horario && p.dia === dia
@@ -84,10 +90,11 @@ function registrarProfesor() {
       timer:3000,
       timerProgressBar:true
 
-    })
+    });
     
   } else {
     profesoresRegistrados.push(profesor);
+    await profesoresApi.registrarProfe(profesor);
     guardarProfesores(profesoresRegistrados);
     limpiarFormulario();
     Swal.fire({
@@ -100,26 +107,17 @@ function registrarProfesor() {
   }
 }
 
-function obtenerProfesores() {
-  
-  const profesoresJson = localStorage.getItem('profesores');
-
-  return profesoresJson ? JSON.parse(profesoresJson) : [];
-}
 
 function guardarProfesores(profesores) {
 
   const profesoresJson = JSON.stringify(profesores);
 
   localStorage.setItem('profesores', profesoresJson);
-  cargarProfesores();
+  // cargarProfesores();
 
 }
 
 function cargarProfesores() {
-
- const profesoresRegistrados = obtenerProfesores();
-
 // Limpia todas las celdas de la tabla
 for (let dia of ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']) {
   for (let horario of ['1400', '1500', '1600', '1700', '1800', '1900']) {
