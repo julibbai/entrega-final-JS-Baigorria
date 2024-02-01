@@ -1,20 +1,76 @@
 {
   "profesores": [
     {
-      "id": "f6da",
-      "nombre": "Mabel",
-      "apellido": "Miranda",
+      "id": "8416",
+      "nombre": "Monica",
+      "apellido": "Baigorria",
+      "aula": "aula3",
+      "horario": "14:00",
+      "dia": "martes"
+    },
+    {
+      "id": "f9cc",
+      "nombre": "Sonia",
+      "apellido": "Leguizamón",
       "aula": "aula1",
       "horario": "14:00",
       "dia": "lunes"
     },
     {
-      "id": "a9c0",
-      "nombre": "Sonia",
-      "apellido": "Legui",
+      "id": "2e1c",
+      "nombre": "Julieta Beatriz",
+      "apellido": "Baigorria",
       "aula": "aula1",
-      "horario": "18:00",
+      "horario": "16:00",
       "dia": "lunes"
+    },
+    {
+      "id": "d220",
+      "nombre": "Sonia",
+      "apellido": "Leguizamón",
+      "aula": "aula2",
+      "horario": "15:00",
+      "dia": "lunes"
+    },
+    {
+      "id": "5aae",
+      "nombre": "Sonia",
+      "apellido": "Leguizamón",
+      "aula": "aula2",
+      "horario": "14:00",
+      "dia": "lunes"
+    },
+    {
+      "id": "649d",
+      "nombre": "Clara",
+      "apellido": "Baigorria",
+      "aula": "aula2",
+      "horario": "17:00",
+      "dia": "miercoles"
+    },
+    {
+      "id": "90b9",
+      "nombre": "Jose",
+      "apellido": "Baigorria",
+      "aula": "aula3",
+      "horario": "14:00",
+      "dia": "viernes"
+    },
+    {
+      "id": "7435",
+      "nombre": "Viviana",
+      "apellido": "Villegas",
+      "aula": "aula2",
+      "horario": "14:00",
+      "dia": "miercoles"
+    },
+    {
+      "id": "abab",
+      "nombre": "Julieta Beatriz",
+      "apellido": "Baigorria",
+      "aula": "aula1",
+      "horario": "16:00",
+      "dia": "miercoles"
     }
   ]
 }

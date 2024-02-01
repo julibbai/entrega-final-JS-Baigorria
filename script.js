@@ -5,25 +5,6 @@ import profesoresApi from "./src/api/profesores.api.js";
 
 let profesoresRegistrados;
 
-function mostrarInformacion(id, nombre, apellido, aula, horario, dia) {
-
-  Swal.fire({
-    title: "¿Desea eliminar?",
-    confirmButtonText:"Cancelar",
-    confirmButtonColor:"green",
-    showCancelButton:true,
-    cancelButtonText: "Sí",
-    cancelButtonColor:"red",
-    icon:"question"
-
-  }).then((respuesta) =>{
-    if(!respuesta.isConfirmed){
-      eliminarProfesor(id);
-
-    } 
-  })
-};
-
 document.addEventListener("DOMContentLoaded", async function () {
   profesoresRegistrados = await profesoresApi.obtenerProfes();
   cargarProfesores();
@@ -32,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 const botonRegistrar = document.querySelector("#botonRegistrar");
+
 
 botonRegistrar.onclick = () => {
   const nombre = document.getElementById('nombre').value;
@@ -63,6 +45,28 @@ botonRegistrar.onclick = () => {
   }
 };
 
+//mostrarInformacion es el botón que se genera cuando un profe
+//se registra, el cual si se clickea se pregunta si se quiere eliminar
+//a través del id del profe con la función eliminarProfesor
+
+function mostrarInformacion(id, nombre, apellido, aula, horario, dia) {
+
+  Swal.fire({
+    title: "¿Desea eliminar?",
+    confirmButtonText:"Cancelar",
+    confirmButtonColor:"green",
+    showCancelButton:true,
+    cancelButtonText: "Sí",
+    cancelButtonColor:"red",
+    icon:"question"
+
+  }).then((respuesta) =>{
+    if(!respuesta.isConfirmed){
+      eliminarProfesor(id);
+
+    } 
+  })
+};
 
 async function eliminarProfesor(id) {
 

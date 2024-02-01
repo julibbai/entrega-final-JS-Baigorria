@@ -42,13 +42,6 @@ button:hover {
   color: rgb(22, 20, 20);
 }
 
-
-
-
-
-/* styles.css */
-
-/* Estilos generales */
 .profesor {
   margin-bottom: 5px;
 }
@@ -56,22 +49,22 @@ button:hover {
 
 
 .profesor-btn {
-  color: white; /* Color del texto del botón de profesores */
-  padding: 8px 12px; /* Espaciado interno del botón de profesores */
-  border: none; /* Borde del botón de profesores */
-  border-radius: 4px; /* Borde redondeado del botón de profesores */
-  cursor: pointer; /* Cursor al pasar sobre el botón de profesores */
-  margin: 4px; /* Margen exterior del botón de profesores */
+  color: white;
+  padding: 8px 12px; 
+  border: none; 
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 4px; 
 }
 
 .profesor-btn.aula1 {
-  background-color: rgb(69, 69, 224); /* Color de fondo del botón de profesores para aula 1 */
+  background-color: rgb(69, 69, 224); 
 }
 
 .profesor-btn.aula2 {
-  background-color:rgb(152, 199, 81); /* Color de fondo del botón de profesores para aula 2 */
+  background-color:rgb(152, 199, 81); 
 }
 
 .profesor-btn.aula3 {
-  background-color: rgb(248, 105, 53); /* Color de fondo del botón de profesores para aula 3 */
+  background-color: rgb(248, 105, 53); 
 }
